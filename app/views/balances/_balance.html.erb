@@ -1,0 +1,21 @@
+<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">
+         <div class="pull-left image">
+         	<%= image_tag("avatar.png", class:"img-rounded avatar") %>
+         </div>
+         <div class="pull-left meta">
+         	<b><%= balance.user.name %></b>
+                            
+            <h6 class="text-muted time"><%= balance.created_at %></h6>
+         </div>
+         
+             <%= link_to [balance], method: :delete, :remote => true, id:"product-title",  data: { confirm: "Вы уверены?" } do %>
+                <i class="fa fa-trash-o fa-2x pull-right" aria-hidden="true"></i>
+             <% end %>
+         
+    </div> <br><br>
+    <div class="post-description comment" style="padding-bottom: 40px;">
+    		<h2><%= balance.amount %> <i class="fa fa-rub fa-2x" aria-hidden="true"></i></h2>
+            <%= link_to "Обновить счет", edit_balance_path(balance), class:"btn btn-primary pull-right" %>
+    </div>
+</div>

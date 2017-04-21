@@ -1,0 +1,30 @@
+<div class="order-back">
+<%= form_for(order) do |f| %>
+
+  <div class="form-group">
+    <h3>Имя:</h3>
+    <%= f.text_field :name,  class:"form-control", :value => current_user.name if user_signed_in? %>
+    
+  </div>
+
+  <div class="form-group">
+    <h3>Адрес покупателя:</h3>
+    <%= f.text_area :address, class:"form-control" %>
+  </div>
+
+  <div class="form-group">
+    <h3>Эл.почта пользователя</h3>
+    <%= f.text_field :email, :value => current_user.email, class:"form-control"  %>
+  </div>
+
+  <h2>Цена заказа: <strong><%= @cart.total_price %></strong> <i class="fa fa-rub " aria-hidden="true"></i> </h2>
+
+
+
+  <br>
+
+  <div class="form-group text-center">
+    <%= f.submit "Оформить заказ", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>

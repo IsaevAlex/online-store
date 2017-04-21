@@ -1,0 +1,54 @@
+<%= render 'layouts/header' %>
+<div class="col-md-8">
+	<div class="row">
+		<%= form_tag products_path, method: 'get', class: 'search-form' do %>
+          <div class="input-group col-md-12">
+                <%= text_field_tag :search, params[:search], class:"form-control" %>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">
+                          <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </span>
+            </div>
+       <% end %><br><br>
+     </div>
+    <div class="row">
+	    <div class="scope category">
+	    	<div class="indent-block-2">
+	    		<ul class="nav nav-tabs" >
+                    <li class="active">
+						<%= link_to phones_products_path, id:"product-title" do %>
+                   			<i class="fa fa-mobile fa-5x" aria-hidden="true"></i>Телефоны</li>
+                   		<% end %>
+                    
+                    <li>
+                    	<%= link_to computers_products_path, id:"product-title" do %>
+                    		<i class="fa fa-desktop fa-5x" aria-hidden="true"></i> Компьютеры</li>
+                    	<% end %>
+	    		</ul>
+	    	</div>
+	    	
+	    </div> <br>
+	</div>
+	<div class="row">
+	    <div class="scope panel indent">
+			<%= link_to "По дате добавления", recent_products_path, id:"product-title" %>	| 
+			<%= link_to "По цене", price_ascending_products_path , id:"product-title" %>		
+		</div> <br>
+	</div>
+	<div class="tab-content">
+        <%= render @products %>
+        <div class="indent">
+			<%= will_paginate @products, renderer: BootstrapPagination::Rails %>
+		</div>
+    </div>
+	
+	
+	
+	
+</div>
+<div class="col-md-3">
+	<div class="panel">
+		<%= render 'searches/new' %>
+	</div>
+</div>

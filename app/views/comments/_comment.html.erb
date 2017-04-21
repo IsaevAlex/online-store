@@ -1,0 +1,20 @@
+<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">
+         <div class="pull-left image">
+         	<%= image_tag("avatar.png", class:"img-rounded avatar") %>
+         </div>
+         <div class="pull-left meta">
+         	<b><%= comment.user.name %></b>
+                            добавил отзыв
+            <h6 class="text-muted time"><%= comment.created_at %></h6>
+         </div>
+         
+             <%= link_to [comment.product, comment], method: :delete, :remote => true,  data: { confirm: "Вы уверены?" } do %>
+                <i class="fa fa-trash-o fa-2x pull-right" aria-hidden="true"></i>
+             <% end %>
+         
+    </div> <br><br>
+    <div class="post-description comment">
+    		<h4><%= comment.comment %></h4>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<%= render 'layouts/header' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="cart-title">Ваша корзина</h1>
+			<h2>Товары</h2>
+			<% @cart.line_items.each do |item| %>
+	        	<li class="products_on_carts"><%= item.quantity %>&times; <%= link_to item.product.model.name, item.product, id:"product-title" %> <strong><%= item.total_price %></strong></li>
+	    	<% end %>
+	    	<h3>Общая цена: <strong><%= @cart.total_price %></strong></h3><br><br>
+	    	<%= link_to 'Удалить корзину', @cart, method: :delete,    data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+	    	<%= link_to 'Добавить еще товары', products_path, class:"btn btn-primary" %>
+	    	<%= link_to  "Оформить заказ", new_order_path, class:"btn btn-success" %>
+		</div>
+		<div class="col-md-4">
+			<i class="fa fa-shopping-basket" aria-hidden="true"></i>
+		</div>
+	</div>	
+</div>
+
+<ul>
+    
+    
+
+</ul>

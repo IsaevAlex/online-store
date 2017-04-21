@@ -1,0 +1,38 @@
+<div class="panel indent">
+        <div class="row">
+            <div class="col-md-6">
+                 <h2><strong><%= link_to product.model.name, product, id:"product-title" %></strong></h2>
+            </div>  
+        </div>
+        
+        <div class="row">
+            <div class="col-md-7">
+                <%= link_to product  do %>
+                    
+                    <% product.product_images.take(1).each do | image | %>
+                        <%= image_tag image.image.url, :size => "400x300"%>
+                    <% end %><br><br>
+                <% end %>
+            </div>      
+            
+            <div class="col-md-5">
+                <h2><%= product.price %> <i class="fa fa-rub fa-1x"></i></h2>
+                <h3>Категория: <%= product.category.name %> </i></h3><br><br>
+                <p><%= link_to "Подробнее", product , class:"btn btn-primary" %><br></p> <br>
+                <%= link_to like_product_path(product), method: :put do %>
+                    <i class="fa fa-thumbs-o-up fa-4x" id="product-title" aria-hidden="true"></i>
+                    <span id="product-title"><%= product.get_upvotes.size %></span>
+                <% end %>
+                <%= link_to dislike_product_path(product), method: :put do %>
+                    <i class="fa fa-thumbs-o-down fa-4x" id="product-title" aria-hidden="true"></i>
+                    <span id="product-title"><%= product.get_downvotes.size %></span>
+                <% end %> 
+                <%= link_to product do %>
+                    <i class="fa fa-comment-o fa-4x" id="product-title" aria-hidden="true"></i>
+                    <span id="product-title"><%= product.comments.count %></span>
+                <% end %>    
+            </div>
+            
+
+        </div>  
+    </div>

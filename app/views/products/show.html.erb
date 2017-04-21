@@ -1,0 +1,120 @@
+<%= render 'layouts/header' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h1 class="product-name">
+       			<%= @product.model.name %> <%= @product.model.producer.name %>
+    		</h1><br>
+            <h3>
+                Категория: <%= @product.category.name %>
+            </h3>
+            <h3>
+                Тип устройства: <%= @product.type.name %>
+            </h3>
+    		<h3>
+    			Разрешение: <%= @product.screen.name %>
+    		</h3>
+    		<h3>
+    			Память: <%= @product.memory %> ГБ
+    		</h3>
+            <h3>
+            	Батарея: <%= @product.battery_charge %> МА/ч
+            </h3>  
+            <h3>
+                <% if @product.on_sale? %>
+                    В продаже: <strong>Да</strong>
+                <% else %>
+                    В продаже: <strong>Нет</strong>
+                <% end %>
+            </h3>    
+            <h3>
+                <% if @product.garant? %>
+                    Гарантия: <strong>Да</strong>
+                <% else %>
+                    Гарантия: <strong>Нет</strong>
+                <% end %>
+            </h3>      
+            
+            <h3 class="product-price">
+            	Цена: <%= @product.price %> <i class="fa fa-rub fa-1x"></i>
+            </h3><br><br>
+            <p>
+            	<%= button_to 'Добавить в корзину', line_items_path(product_id: @product), class:"btn-cart" %>	
+            </p>
+            
+    				
+		</div>
+        <div class="col-md-6">
+              
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <% @product.product_images.each_with_index do |product_image, index| %>
+                        <% if index == 0 %>
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <% else %>
+                            <li data-target="#myCarousel" data-slide-to="<%= index %>"></li>
+                        <% end %>
+                    <% end %>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner" role="listbox">
+                        <% @product.product_images.each_with_index do |product_image, index| %>
+                            <% if index == 0 %>
+                                <div class="item active">
+                                    <p><%= image_tag product_image.image.url, width:"600", height:"400" %></p>
+                                </div>
+                            <% else %>
+                                 <div class="item">
+                                     <p><%= image_tag product_image.image.url,  width:"600", height:"400" %></p>
+                                 </div>
+                            <% end %>
+                        
+                        <% end %>                    
+                  </div>
+                  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"></a>
+                  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"></a>
+              </div><br><br>
+              <div class="likes_comments">
+                    <%= link_to like_product_path(@product), method: :put do %>
+                         <div class="like-class">
+                             <i class="fa fa-thumbs-o-up fa-5x" id="product-title" aria-hidden="true"></i>
+                             <span id="product-title"><%= @product.get_upvotes.size %></span>
+                         </div>
+                    <% end %>
+                    <%= link_to dislike_product_path(@product), method: :put do %>
+                         <div class="like-class">
+                             <i class="fa fa-thumbs-o-down fa-5x" id="product-title" aria-hidden="true"></i>
+                             <span id="product-title"><%= @product.get_downvotes.size %></span>
+                         </div>
+                    <% end %> 
+                    <div class="like-class">
+                        <i class="fa fa-comment-o fa-5x" id="product-title" aria-hidden="true"></i>
+                        <span id="product-title"><%= @product.comments.count %></span>
+                    </div>    
+              </div>
+              
+        </div>
+<!--  -->
+	</div><br><br>
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Коментарии</h1>
+            <div class="comment-form">
+                <% if user_signed_in?  %>
+                    <h3>Добавить отзыв</h3>
+                    <div id="comment">
+                        <%= render :partial => 'comments/form', :locals => {:comment => @comment} %>
+                    </div> <br>
+                <% else %>
+                        <p>Чтобы добавить отзыв,вы должны зарегистрироваться</p>    
+                <% end %><br>
+            </div><br><br>
+            <div id="com">
+                <%= render @product.comments.order("created_at DESC") %>
+            </div>      
+        </div>
+        
+    </div>	
+</div>

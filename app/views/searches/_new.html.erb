@@ -1,0 +1,55 @@
+<div class="advanced">
+	<h3>Расширенный поиск</h3><br>
+	<%= form_for Search.new do |f| %>
+		 <p>
+		 	<strong>Цена:</strong>
+		  	<%= f.text_field :min_price, placeholder:"От", class:"form-control" %><br>
+			<%= f.text_field :max_price, placeholder:"До", class:"form-control" %> 
+		 </p> <br>
+		 <p>
+		 	<%= f.collection_select :category_id, Category.order(:name), :id, :name, {prompt: "Выберите категорию"} , {class: "form-control"}  %>
+		 </p> <br>
+		 <p>
+		 	<%= f.collection_select :model_id, Model.order(:name), :id, :name, {prompt: "Выберите модель"} , {class: "form-control"}  %>
+		 </p> <br>
+		 <p>
+		 	<%= f.collection_select :type_id, Type.order(:name), :id, :name, {prompt: "Выберите тип телефона"} , {class: "form-control"}  %>
+		 </p><br> 		
+		 <p>
+		 	<%= f.collection_select :system_type_id, SystemType.order(:name), :id, :name, {prompt: "Выберите операционную систему"} , {class: "form-control"}  %>
+		 </p><br> 	
+		 <p>
+		 	<%= f.collection_select :screen_id, Screen.order(:name), :id, :name, {prompt: "Выберите разрешение экрана"} , {class: "form-control"}  %>
+		 </p><br>
+		 <p>
+		 	<strong>Гарантия</strong>
+		 	<%= f.check_box :garant, class:"form-control" %>
+		 </p>
+		 <p>
+		 	<strong>В продаже</strong>
+		 	<%= f.check_box :on_sale, class:"form-control" %>
+		 </p>	
+		 <p>
+		 	<strong>Память:</strong>
+			<%= f.text_field :min_memory, class:"form-control", placeholder:"От" %><br>
+			<%= f.text_field :max_memory, class:"form-control", placeholder:"До" %>
+		 </p><br> 	
+	     <p>
+	     	<strong>Оперативная память:</strong> 
+			<%= f.text_field :min_ram, class:"form-control", placeholder:"От" %><br>
+			<%= f.text_field :max_ram, class:"form-control", placeholder:"До" %>
+		 </p><br>	 		
+	     <p>
+	     	<strong>Батарея:</strong>
+			<%= f.text_field :min_battery_charge, class:"form-control", placeholder:"От" %><br>
+			<%= f.text_field :max_battery_charge, class:"form-control", placeholder:"До" %>
+		</p> <br>			
+		<p>
+			<div style="padding-bottom: 30px;">
+				<%= f.submit "Поиск", class:"btn btn-primary pull-right" %>	
+			</div>
+			
+		</p> 
+   <% end %>
+</div>
+	

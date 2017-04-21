@@ -1,0 +1,43 @@
+<%= render 'layouts/header' %>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="cart-title">Обновить счет</h1>
+			<div class="order-back">
+				  <%= form_for(@balance) do |f| %>
+				    <% if @balance.errors.any? %>
+				      <div id="error_explanation">
+				        <h2><%= pluralize(@balance.errors.count, "error") %> prohibited this cart from being saved:</h2>
+
+				        <ul>
+				        <% @balance.errors.full_messages.each do |message| %>
+				          <li><%= message %></li>
+				        <% end %>
+				        </ul>
+				      </div>
+				    <% end %>
+				   
+				   <div class="form-group">
+				     <%= f.hidden_field :user_id, :value => current_user.id,  class:"form-control" %>
+				   </div>
+
+				   <div class="form-group">
+				     <h2>Сколько у Вас сейчас: <%= @balance.amount %> <i class="fa fa-rub " aria-hidden="true"></i>  </h2>
+				   </div>
+
+				   <div class="form-group">
+				   	 <h3>Сколько хотите вложить:</h3>
+				     <%= f.text_field :balance, class:"form-control" %>
+				   </div>
+
+				   <div class="form-group">
+				      <%= f.submit "Создать счет", class:"btn btn-primary" %>
+				   </div>
+				<% end %>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<i class="fa fa-money" aria-hidden="true"></i>
+		</div>
+	</div>
+</div>

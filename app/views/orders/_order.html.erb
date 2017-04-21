@@ -1,0 +1,22 @@
+<div class="panel panel-white post panel-shadow">
+	<div class="post-heading">
+         <div class="pull-left image">
+         	<%= image_tag("avatar.png", class:"img-rounded avatar") %>
+         </div>
+         <div class="pull-left meta">
+         	<b><%= order.name %></b>
+                            
+            <h6 class="text-muted time"><%= order.created_at %></h6>
+         </div>
+         
+             <%= link_to [order], method: :delete, :remote => true, id:"product-title",  data: { confirm: "Вы уверены?" } do %>
+                <i class="fa fa-trash-o fa-2x pull-right" aria-hidden="true"></i>
+             <% end %>
+         
+    </div> <br><br>
+    <div class="post-description comment" style="padding-bottom: 40px;">
+    		<h2>Адрес: <%= order.address %> </h2>
+            <h2>Общая сумма: <%= order.total_amount %> <i class="fa fa-rub fa-2x" aria-hidden="true"></i></h2>
+            
+    </div>
+</div>
